@@ -14,6 +14,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
   ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   networking.firewall.enable = true;
   services.openssh = {
     enable = true;
