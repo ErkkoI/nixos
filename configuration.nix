@@ -14,6 +14,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
   ];
+  boot.loader.grub.enable = true;
   services.openssh.enable = true;
 
   users.users.root.openssh.authorizedKeys.keys =
