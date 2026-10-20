@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, config, options, specialArgs, modulesPath, _class, _prefix }:
 {
   disko.devices.disk.system = {
     type = "disk";
@@ -9,6 +9,7 @@
         bios = {
           size = "1M";
           type = "EF02";
+          attributes = [ 0 ];
         };
         root = {
           size = "100%";
