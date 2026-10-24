@@ -8,7 +8,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./opencloud.nix
-    ./nix
+    ./nix.nix
   ];
   system.autoUpgrade = {
     enable = true;
