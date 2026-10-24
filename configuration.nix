@@ -8,11 +8,8 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./opencloud.nix
+    ./nix
   ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.gc = {
-    options = "--delete-older-than 30d";
-  };
   system.autoUpgrade = {
     enable = true;
     flake = "github:erkkoi/nixos";
@@ -21,13 +18,6 @@
     allowReboot = true;
     runGarbageCollection = true;
   };
-  systemd.services.nixos-upgrade.environment = {
-    GIT_AUTHOR_NAME = "NixOS Auto-upgrade";
-    GIT_AUTHOR_EMAIL = "root@erkkoihalainen.fi";
-    GIT_COMMITTER_NAME = "NixOS Auto-upgrade";
-    GIT_COMMITTER_EMAIL = "root@erkkoihalainen.fi";
-  };
-  nix.settings.auto-optimise-store = true;
   networking.firewall.enable = true;
   services.openssh = {
     enable = true;
