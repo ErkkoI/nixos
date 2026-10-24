@@ -8,9 +8,9 @@
   };
   outputs =
     {
-      self,
       nixpkgs,
       disko,
+      ...
     }:
     {
       nixosConfigurations.pilvipannu = nixpkgs.lib.nixosSystem {

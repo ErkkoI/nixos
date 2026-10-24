@@ -1,18 +1,13 @@
 {
   modulesPath,
-  lib,
-  pkgs,
-  config,
-  options,
-  specialArgs,
-  _class,
-  _prefix,
+  ...
 }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ./opencloud.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   networking.firewall.enable = true;
@@ -28,7 +23,6 @@
       PerSourcePenalties = "crash:3600s authfail:3600s max:86400s";
     };
   };
-
   users.users.erkkoi = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
