@@ -1,0 +1,26 @@
+name: cron update flake.lock
+# cheers to https://blog.gothuey.dev/2025/nixos-auto-upgrade/
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@31.11.3
+      - run: nix flake update
+      - uses: stefanzweifel/git-auto-commit-action@v7.2.1
+        with:
+          commit_message: 'chore(deps): bump flake.lock'
+          commit_user_name: Flake Bot Update
+          commit_author: Flake Bot Update <actions@github.com>
+          branch: main
+          file_pattern: flake.lock
+          skip_dirty_check: false
+          skip_fetch: true

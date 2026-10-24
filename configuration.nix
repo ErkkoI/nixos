@@ -11,20 +11,15 @@
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc = {
-    automatic = true;
-    dates = "weekly";
     options = "--delete-older-than 30d";
   };
   system.autoUpgrade = {
     enable = true;
     flake = "github:erkkoi/nixos";
-    flags = [
-      "--print-build-logs"
-      "--commit-lock-file"
-    ];
-    dates = "02:00";
+    dates = "03:00";
     randomizedDelaySec = "45min";
     allowReboot = true;
+    runGarbageCollection = true;
   };
   systemd.services.nixos-upgrade.environment = {
     GIT_AUTHOR_NAME = "NixOS Auto-upgrade";
