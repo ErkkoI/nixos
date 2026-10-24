@@ -10,6 +10,29 @@
     ./opencloud.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:erkkoi/nixos";
+    flags = [
+      "--print-build-logs"
+      "--commit-lock-file"
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+    allowReboot = true;
+  };
+  systemd.services.nixos-upgrade.environment = {
+    GIT_AUTHOR_NAME = "NixOS Auto-upgrade";
+    GIT_AUTHOR_EMAIL = "root@erkkoihalainen.fi";
+    GIT_COMMITTER_NAME = "NixOS Auto-upgrade";
+    GIT_COMMITTER_EMAIL = "root@erkkoihalainen.fi";
+  };
+  nix.settings.auto-optimise-store = true;
   networking.firewall.enable = true;
   services.openssh = {
     enable = true;
@@ -31,6 +54,10 @@
     ];
   };
   security.sudo.wheelNeedsPassword = false;
-
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+    fileSystems = [ "/" ];
+  };
   system.stateVersion = "26.05";
 }
