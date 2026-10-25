@@ -9,16 +9,16 @@
     ./disk-config.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  # nix.gc.options = "--delete-older-than 7d";
-  # nix.settings.auto-optimise-store = true;
-  #system.autoUpgrade = {
-  #  enable = true;
-  #  flake = "github:erkkoi/nixos";
-  #  dates = "03:00";
-  #  randomizedDelaySec = "45min";
-  #  allowReboot = true;
-  #  runGarbageCollection = true;
-  #};
+  nix.gc.options = "--delete-older-than 7d";
+  nix.settings.auto-optimise-store = true;
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:erkkoi/nixos";
+    dates = "03:00";
+    randomizedDelaySec = "45min";
+    allowReboot = true;
+    runGarbageCollection = true;
+  };
   networking.firewall.enable = true;
   services.openssh = {
     enable = true;
@@ -40,10 +40,10 @@
     ];
   };
   security.sudo.wheelNeedsPassword = false;
-  # services.btrfs.autoScrub = {
-  #   enable = true;
-  #   interval = "weekly";
-  #   fileSystems = [ "/" ];
-  # };
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+    fileSystems = [ "/" ];
+  };
   system.stateVersion = "26.05";
 }
