@@ -11,6 +11,7 @@ in
 
   services.opencloud = {
     enable = true;
+    port = 9200;
     url = "https://cloud.erkkoihalainen.fi";
     address = "127.0.0.1";
     environmentFile = secretsFile;
