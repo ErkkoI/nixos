@@ -2,8 +2,8 @@
 {
   services.caddy = {
     enable = true;
-    virtualHosts."localhost".extraConfig = ''
-      tls internal
+    openFirewall = true;
+    virtualHosts."erkkoihalainen.fi".extraConfig = ''
       respond "Hello, world!"
     '';
   };
