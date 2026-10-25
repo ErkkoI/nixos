@@ -4,8 +4,8 @@
     enable = true;
     openFirewall = true;
     virtualHosts."erkkoihalainen.fi".extraConfig = ''
-      respond "Hello!"
       tls internal
+      respond "Hello!"
     '';
   };
 }
