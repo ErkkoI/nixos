@@ -25,6 +25,9 @@
           nix-minecraft.nixosModules.minecraft-servers
           {
             nixpkgs.overlays = [ nix-minecraft.overlay ];
+            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
+              "minecraft-server"
+            ];
           }
           ./configuration.nix
         ];
