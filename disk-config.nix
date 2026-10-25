@@ -13,9 +13,13 @@
         root = {
           size = "100%";
           content = {
-            type = "filesystem";
-            format = "ext4";
+            type = "btrfs";
+            extraArgs = [ "-f" ]; # Override existing partition
             mountpoint = "/";
+            mountOptions = [
+              "compress=zstd"
+              "noatime"
+            ];
           };
         };
       };
