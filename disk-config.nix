@@ -12,14 +12,20 @@
         };
         root = {
           size = "100%";
+
           content = {
             type = "btrfs";
             extraArgs = [ "-f" ]; # Override existing partition
-            mountpoint = "/";
-            mountOptions = [
-              "compress=zstd"
-              "noatime"
-            ];
+            subvolumes = {
+              "/root" = {
+                mountpoint = "/";
+                mountOptions = ["subvol=root" "compress=zstd" "noatime"];
+              };
+              "/swap" = {
+                mountpoint = "/swap";
+                swap.swapfile.size = "2G";
+              };
+            };
           };
         };
       };
