@@ -4,8 +4,6 @@ let
 in
 {
   services.caddy = {
-    enable = true;
-    openFirewall = true;
     virtualHosts."cloud.erkkoihalainen.fi".extraConfig = ''
       reverse_proxy 127.0.0.1:9200
     '';
@@ -15,14 +13,12 @@ in
     enable = true;
     url = "https://cloud.erkkoihalainen.fi";
     address = "127.0.0.1";
-    port = 9200;
     environmentFile = secretsFile;
     environment = {
       # The NixOS fullstack module uses internally generated certificates.
       OC_INSECURE = "true";
       # Caddy terminates public TLS; its public OIDC certificate is validated.
-      PROXY_TLS = "false";
-      PROXY_OIDC_INSECURE = "false";
+      # PROXY_TLS = "false";
       IDM_CREATE_DEMO_USERS = "false";
     };
   };

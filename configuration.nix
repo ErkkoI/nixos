@@ -9,6 +9,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./caddy.nix
+    ./opencloud.nix
   ];
   nix.settings.experimental-features = [
     "nix-command"
