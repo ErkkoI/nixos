@@ -7,16 +7,14 @@
       type = "gpt";
       partitions = {
         MBR = {
-          priority = 0;
           size = "1M";
           type = "EF02";
         };
         root = {
-          priority = 1;
           size = "100%";
           content = {
             type = "btrfs";
-            extraArgs = [ "-f" ];
+            extraArgs = [ "-L" "nixos" "-f" ];
             mountpoint = "/";
             subvolumes = {
               "/root" = {
@@ -32,7 +30,7 @@
                 mountpoint = "/nix";
               };
               "/swap" = {
-                mountpoint = "/.swapvol";
+                mountpoint = "/swap";
                 swap.swapfile.size = "1G";
               };
             };
