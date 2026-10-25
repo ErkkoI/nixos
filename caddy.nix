@@ -3,7 +3,7 @@
   services.caddy = {
     enable = true;
     openFirewall = true;
-    virtualHosts."localhost".extraConfig = ''
+    virtualHosts."erkkoihalainen.fi".extraConfig = ''
       respond "Hello!"
     '';
   };
