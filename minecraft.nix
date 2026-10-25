@@ -6,15 +6,17 @@
 }:
 
 {
+  networking.firewall.allowedTCPPorts = [ 25565 ];
   services.minecraft-servers = {
     enable = true;
     eula = true;
-    openFirewall = true;
+    openFirewall = false;
     servers.joulupojat = {
       enable = true;
       autoStart = false;
       package = pkgs.fabricServers.fabric-1_21_11.override {
         loaderVersion = "0.18.4";
+        jre_headless = pkgs.openjdk27.headless;
       };
       whitelist = {
         ukimies = "f5e5eb08-eb21-40a0-8b62-486f4b6f8559";
@@ -28,7 +30,11 @@
       };
       serverProperties = {
         white-list = true;
+        enforce-whitelist = true;
+        online-mode = true;
         server-port = 25565;
+        enable-rcon = false;
+        enable-query = false;
       };
       jvmOpts = "-Xmx2G -Xms1G";
       symlinks = {
