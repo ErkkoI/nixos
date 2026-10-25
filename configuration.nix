@@ -13,7 +13,7 @@
   nix.settings.auto-optimise-store = true;
   system.autoUpgrade = {
     enable = true;
-    flake = "github:erkkoi/nixos";
+    flake = "github:erkkoi/nixos#pilvipannu";
     dates = "03:00";
     randomizedDelaySec = "45min";
     allowReboot = true;
