@@ -1,15 +1,12 @@
 let
-  sources = import ./npins;
-  pkgs = import sources.nixpkgs {};
+  nixpkgs = fetchTarball "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
+  pkgs = import nixpkgs { config = {}; overlays = []; };
 in
 
-pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [
-    npins
-    nixos-anywhere
-    nixos-rebuild
+pkgs.mkShellNoCC {
+  packages = with pkgs; [
+    helix
+    nixfmt
+    nixd
   ];
-  shellHook = ''
-    export NIX_PATH="nixpkgs=${sources.nixpkgs}:nixos-config=$PWD/configuration.nix"
-  '';
 }

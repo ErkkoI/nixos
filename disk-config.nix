@@ -19,7 +19,11 @@
             subvolumes = {
               "/root" = {
                 mountpoint = "/";
-                mountOptions = ["subvol=root" "compress=zstd" "noatime"];
+                mountOptions = [
+                  "subvol=root"
+                  "compress=zstd"
+                  "noatime"
+                ];
               };
               "/swap" = {
                 mountpoint = "/swap";

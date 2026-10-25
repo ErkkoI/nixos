@@ -31,8 +31,14 @@ in
   # enters the repository, Nix store, shell arguments, or this playbook.
   systemd.services.opencloud-bootstrap-secrets = {
     description = "Create the initial OpenCloud admin credential";
-    before = [ "opencloud-init-config.service" "opencloud.service" ];
-    requiredBy = [ "opencloud-init-config.service" "opencloud.service" ];
+    before = [
+      "opencloud-init-config.service"
+      "opencloud.service"
+    ];
+    requiredBy = [
+      "opencloud-init-config.service"
+      "opencloud.service"
+    ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;

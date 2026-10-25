@@ -7,19 +7,31 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ./caddy.nix
   ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.gc.options = "--delete-older-than 7d";
   nix.settings.auto-optimise-store = true;
   system.autoUpgrade = {
     enable = true;
-    flake = "github:erkkoi/nixos#pilvipannu";
+    # Disable adding the --upgrade flag. Not used with flakes.
+    # Flake update is done in a GH action.
+    upgrade = false;
+    flake = "github:erkkoi/nixos#pannu";
     dates = "03:00";
     randomizedDelaySec = "45min";
     allowReboot = true;
+    rebootWindow = {
+      lower = "01:00";
+      upper = "05:00";
+    };
     runGarbageCollection = true;
   };
   networking.firewall.enable = true;
+  networking.hostName = "pannu";
   services.openssh = {
     enable = true;
     openFirewall = true;
