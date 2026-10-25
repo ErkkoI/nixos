@@ -15,9 +15,6 @@ in
     address = "127.0.0.1";
     environmentFile = secretsFile;
     environment = {
-      # The NixOS fullstack module uses internally generated certificates.
-      #OC_INSECURE = "true";
-      # Caddy terminates public TLS; its public OIDC certificate is validated.
       PROXY_TLS = "false";
       IDM_CREATE_DEMO_USERS = "false";
     };

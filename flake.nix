@@ -5,11 +5,15 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+    };
   };
   outputs =
     {
       nixpkgs,
       disko,
+      nix-minecraft
       ...
     }:
     {
@@ -17,6 +21,10 @@
         system = "x86_64-linux";
         modules = [
           disko.nixosModules.disko
+          nix-minecraft.nixosModules.minecraft-servers
+          {
+            nixpkgs.overlays = [ nix-minecraft.overlay ];
+          }
           ./configuration.nix
         ];
       };
