@@ -36,7 +36,7 @@
         enable-rcon = false;
         enable-query = false;
       };
-      jvmOpts = "-Xmx2G -Xms2G -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication";
+      jvmOpts = "-Xmx2560M -Xms2560M -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication -XX:+PerfDisableSharedMem";
       symlinks = {
         mods = pkgs.linkFarmFromDrvs "mods" (
           builtins.attrValues {
