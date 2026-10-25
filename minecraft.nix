@@ -13,7 +13,7 @@ let
       "java.xml"
       "jdk.jfr"
     ];
-    jdk = jdk25_headless;
+    jdk = pkgs.jdk25_headless;
   };
 in
 {
