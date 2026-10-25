@@ -16,7 +16,8 @@
       autoStart = false;
       package = pkgs.fabricServers.fabric-1_21_11.override {
         loaderVersion = "0.18.4";
-        jre_headless = pkgs.jdk25_headless; # pkgs.graalvmPackages.graalvm-ce
+        # jre_headless = pkgs.jre25_minimal;
+        jre_headless = pkgs.graalvmPackages.graalvm-ce;
       };
       whitelist = {
         ukimies = "f5e5eb08-eb21-40a0-8b62-486f4b6f8559";
