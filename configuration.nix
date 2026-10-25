@@ -1,5 +1,6 @@
 {
   modulesPath,
+  pkgs,
   ...
 }:
 {
@@ -57,5 +58,8 @@
     interval = "weekly";
     fileSystems = [ "/" ];
   };
+  environment.systemPackages = with pkgs; [
+    gitMinimal
+  ];
   system.stateVersion = "26.05";
 }
