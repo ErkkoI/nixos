@@ -16,7 +16,7 @@
       autoStart = false;
       package = pkgs.fabricServers.fabric-1_21_11.override {
         loaderVersion = "0.18.4";
-        jre_headless = pkgs.jre25_minimal.headless;
+        jre_headless = pkgs.jre25_minimal;
         #jre_headless = pkgs.graalvmPackages.graalvm-ce;
       };
       whitelist = {
