@@ -28,6 +28,7 @@
       };
       serverProperties = {
         white-list = true;
+        server-port = 25565
       };
       jvmOpts = "-Xmx2G -Xms1G";
       symlinks = {
