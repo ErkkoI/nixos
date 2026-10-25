@@ -6,34 +6,16 @@
     content = {
       type = "gpt";
       partitions = {
-        MBR = {
+        bios = {
           size = "1M";
           type = "EF02";
         };
         root = {
           size = "100%";
           content = {
-            type = "btrfs";
-            extraArgs = [ "-L" "nixos" "-f" ];
+            type = "filesystem";
+            format = "ext4";
             mountpoint = "/";
-            subvolumes = {
-              "/root" = {
-                mountOptions = [ "compress=zstd:1" "noatime" ];
-                mountpoint = "/";
-              };
-              "/home" = {
-                mountOptions = [ "compress=zstd:1" "noatime" ];
-                mountpoint = "/home";
-              };
-              "/nix" = {
-                mountOptions = [ "compress=zstd:1" "noatime" ];
-                mountpoint = "/nix";
-              };
-              "/swap" = {
-                mountpoint = "/swap";
-                swap.swapfile.size = "1G";
-              };
-            };
           };
         };
       };
