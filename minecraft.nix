@@ -4,7 +4,18 @@
   lib,
   ...
 }:
-
+let
+  minecraft_jre = pkgs.jre_minimal.override {
+    modules = [
+      "java.base"
+      "java.desktop"
+      "java.management"
+      "java.xml"
+      "jdk.jfr"
+    ];
+    jdk = jdk25_headless;
+  };
+in
 {
   networking.firewall.allowedTCPPorts = [ 25565 ];
   services.minecraft-servers = {
