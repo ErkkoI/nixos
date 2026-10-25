@@ -28,7 +28,7 @@
       };
       serverProperties = {
         white-list = true;
-      }
+      };
       jvmOpts = "-Xmx2G -Xms1G";
       symlinks = {
         mods = pkgs.linkFarmFromDrvs "mods" (
