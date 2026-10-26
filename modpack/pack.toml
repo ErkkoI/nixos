@@ -1,0 +1,13 @@
+name = "joulupojat"
+author = "erkkoi"
+version = "1.0.0"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "4a156fd64af5703043a68506d4d259e0c81833c8057cedf1acd6869e4d25dfa5"
+
+[versions]
+fabric = "0.20.1"
+minecraft = "26.3"
