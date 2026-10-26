@@ -16,11 +16,11 @@ let
   #  ];
   #  jdk = pkgs.jdk_headless;
   #};
-  modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/ErkkoI/nixos/raw/main/modpack/pack.toml";
-    packHash = "sha256-R4KMH2J+zwYgCo9aC3ncPhlkxyMtpUbFDi2hIdMiXlU=";
-    manifestHash = "sha256:0wz247zfs1w6agxpmlrybfisyq1n2l4x2r1djym3lrw5gpgv1bf7";
-  };
+  # modpack = pkgs.fetchPackwizModpack {
+  #   url = "https://github.com/ErkkoI/nixos/raw/main/modpack/pack.toml";
+  #  packHash = "sha256-R4KMH2J+zwYgCo9aC3ncPhlkxyMtpUbFDi2hIdMiXlU=";
+  #  manifestHash = "sha256:0wz247zfs1w6agxpmlrybfisyq1n2l4x2r1djym3lrw5gpgv1bf7";
+  #};
   #mcVersion = modpack.manifest.versions.minecraft;
   #fabricVersion = modpack.manifest.versions.fabric;
   #serverVersion = lib.replaceStrings [ "." ] [ "_" ] "fabric-${mcVersion}";
