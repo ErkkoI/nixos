@@ -21,9 +21,9 @@ let
     packHash = "sha256-QjOSVdqDSr/xaTi8cDzNqo19Vt32H1dO/HV55MOtDCE=";
     manifestHash = "";
   };
-  #mcVersion = modpack.manifest.versions.minecraft;
-  #fabricVersion = modpack.manifest.versions.fabric;
-  #serverVersion = lib.replaceStrings [ "." ] [ "_" ] "fabric-${mcVersion}";
+  mcVersion = modpack.manifest.versions.minecraft;
+  fabricVersion = modpack.manifest.versions.fabric;
+  serverVersion = lib.replaceStrings [ "." ] [ "_" ] "fabric-${mcVersion}";
 in
 {
   networking.firewall.allowedTCPPorts = [ 25565 ];
@@ -34,8 +34,8 @@ in
     servers.joulupojat = {
       enable = true;
       autoStart = false;
-      package = pkgs.fabricServers.fabric-1_21_11.override {
-        loaderVersion = "0.18.4";
+      package = pkgs.fabricServers.${serverVersion}.override {
+        loaderVersion = fabricVersion;
         jre_headless = pkgs.jdk25_headless;
       };
       whitelist = {
