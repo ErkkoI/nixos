@@ -5,7 +5,7 @@
   ...
 }:
 let
-  #minecraft_jre = pkgs.jdk;
+  minecraft_jre = pkgs.jdk_headless;
   #jre_minimal.override {
   #  modules = [
   #    "java.base"
@@ -36,7 +36,7 @@ in
       autoStart = false;
       package = pkgs.fabricServers.${serverVersion}.override {
         loaderVersion = fabricVersion;
-        jre_headless = pkgs.jdk25_headless;
+        jre_headless = minecraft_jre;
       };
       whitelist = {
         ukimies = "f5e5eb08-eb21-40a0-8b62-486f4b6f8559";
