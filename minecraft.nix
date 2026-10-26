@@ -5,17 +5,17 @@
   ...
 }:
 let
-  minecraft_jre = pkgs.jre_minimal.override {
-    modules = [
-      "java.base"
-      "java.desktop"
-      "java.management"
-      "java.xml"
-      "jdk.jfr"
-    ];
-    jdk = pkgs.jdk_headless;
-  };
-  pack_path = ./modpack;
+  minecraft_jre = pkgs.jdk;
+  #jre_minimal.override {
+  #  modules = [
+  #    "java.base"
+  #    "java.desktop"
+  #    "java.management"
+  #    "java.xml"
+  #    "jdk.jfr"
+  #  ];
+  #  jdk = pkgs.jdk_headless;
+  #};
   modpack = pkgs.fetchPackwizModpack {
     url = "https://github.com/ErkkoI/nixos/raw/main/modpack/pack.toml";
     packHash = "sha256-R4KMH2J+zwYgCo9aC3ncPhlkxyMtpUbFDi2hIdMiXlU=";
