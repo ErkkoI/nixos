@@ -5,7 +5,7 @@
   ...
 }:
 let
-  minecraft_jre = jre_minimal.override {
+  minecraft_jre = pkgs.jre_minimal.override {
     modules = [
      "java.base"
      "java.desktop"
