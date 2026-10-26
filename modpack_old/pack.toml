@@ -1,0 +1,12 @@
+name = "Modpack Old"
+version = "1.0.0"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "abcbd28bebb344aa0e0b81f6a635d2a96b1b8a0a7095b8626209c077d287f327"
+
+[versions]
+fabric = "0.18.4"
+minecraft = "1.21.11"

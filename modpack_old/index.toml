@@ -1,0 +1,56 @@
+hash-format = "sha256"
+
+[[files]]
+file = "mods/cloth-config.pw.toml"
+hash = "a06ef129798265e0d7249426fb0ed5c506725b0460dc3dfdb975b8978480895e"
+metafile = true
+
+[[files]]
+file = "mods/clumps.pw.toml"
+hash = "a5f67311e64ea67e8097c1fdd4d20cf11e1c5236334b5becabad7dabdae975db"
+metafile = true
+
+[[files]]
+file = "mods/common-network.pw.toml"
+hash = "220fd16516d62437ea9b64814ff820b5f9190ecdfa88414bbbc751f6cbb45186"
+metafile = true
+
+[[files]]
+file = "mods/distanthorizons.pw.toml"
+hash = "479cc9008a66ce4dea0b0be0f749a986d73f5fe778516d6682a5202e19706179"
+metafile = true
+
+[[files]]
+file = "mods/fabric-api.pw.toml"
+hash = "7adc0d54f139075d8f90dae18ca476753cc3145a70e09c9327736024adfe9b30"
+metafile = true
+
+[[files]]
+file = "mods/ferrite-core.pw.toml"
+hash = "76a12a836d4c7f0f943a1e391dd2d7b5c4673caa497fff16593d49449376b117"
+metafile = true
+
+[[files]]
+file = "mods/inventory-sorting.pw.toml"
+hash = "fd8297a04498847c8658dcfdc70e8c85f381097dfe2dac78428d1584d7242031"
+metafile = true
+
+[[files]]
+file = "mods/jei.pw.toml"
+hash = "b953bbb028f8c6f1720f9d1c7d6b8bd99fa837a1732006aa8633a3f7537c6f39"
+metafile = true
+
+[[files]]
+file = "mods/journeymap.pw.toml"
+hash = "fa37926328b6b605cce3ca966e2b50af973a2d1043188da4599f105c2a430606"
+metafile = true
+
+[[files]]
+file = "mods/lithium.pw.toml"
+hash = "0e87ab10adb3db84b1d6d2ce8bdd7158878b56c965055056b10ad6cde2634568"
+metafile = true
+
+[[files]]
+file = "mods/spark.pw.toml"
+hash = "c073f13897a838e3c409e46b8a1d8cb510d6a6584dd815aeadaf4886f1779513"
+metafile = true
