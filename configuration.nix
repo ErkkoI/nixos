@@ -10,7 +10,7 @@
     ./disk-config.nix
     ./caddy.nix
     ./opencloud.nix
-    # ./minecraft.nix
+    ./minecraft.nix
   ];
   nix.settings.experimental-features = [
     "nix-command"

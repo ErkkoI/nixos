@@ -5,16 +5,16 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nix-minecraft = {
-    #  url = "github:Infinidoge/nix-minecraft";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
       nixpkgs,
       disko,
-      #nix-minecraft,
+      nix-minecraft,
       ...
     }:
     {
@@ -22,12 +22,12 @@
         system = "x86_64-linux";
         modules = [
           disko.nixosModules.disko
-          #nix-minecraft.nixosModules.minecraft-servers
+          nix-minecraft.nixosModules.minecraft-servers
           {
-            #nixpkgs.overlays = [ nix-minecraft.overlay ];
-            #nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-            #  "minecraft-server"
-            #];
+            nixpkgs.overlays = [ nix-minecraft.overlay ];
+            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
+              "minecraft-server"
+            ];
           }
           ./configuration.nix
         ];
