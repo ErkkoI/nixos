@@ -34,8 +34,8 @@ in
     servers.joulupojat = {
       enable = true;
       autoStart = false;
-      package = pkgs.fabricServers.fabric-26_3.override {
-        loaderVersion = "0.20.1";
+      package = pkgs.fabricServers.fabric-1_21_11.override {
+        loaderVersion = "0.18.4";
         # jre_headless = minecraft_jre;
       };
       whitelist = {
@@ -57,9 +57,9 @@ in
         enable-query = false;
       };
       jvmOpts = "-Xmx2048M -Xms2048M -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication -XX:+PerfDisableSharedMem";
-      symlinks = {
-        "mods" = "${modpack}/mods";
-      };
+      # symlinks = {
+      #  "mods" = "${modpack}/mods";
+      # };
     };
   };
 }
