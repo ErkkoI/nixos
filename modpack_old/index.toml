@@ -17,17 +17,17 @@ metafile = true
 
 [[files]]
 file = "mods/distanthorizons.pw.toml"
-hash = "479cc9008a66ce4dea0b0be0f749a986d73f5fe778516d6682a5202e19706179"
+hash = "841715d6991bc0fb1570e87b1718273c7fe9be585109dd882a02b1f33f48b3e7"
 metafile = true
 
 [[files]]
 file = "mods/fabric-api.pw.toml"
-hash = "7adc0d54f139075d8f90dae18ca476753cc3145a70e09c9327736024adfe9b30"
+hash = "0c2a00cdbcf84f32ed8c6232e94cadb586bf1280d6b922818db808c16c6d8a77"
 metafile = true
 
 [[files]]
 file = "mods/ferrite-core.pw.toml"
-hash = "76a12a836d4c7f0f943a1e391dd2d7b5c4673caa497fff16593d49449376b117"
+hash = "816b735b2ad505476201800a99f527e61b392b712b9d20ca9edcce05f412fe87"
 metafile = true
 
 [[files]]
@@ -37,20 +37,25 @@ metafile = true
 
 [[files]]
 file = "mods/jei.pw.toml"
-hash = "b953bbb028f8c6f1720f9d1c7d6b8bd99fa837a1732006aa8633a3f7537c6f39"
+hash = "502932f8697e9b5248529cd621df3d8f31329c58bde03ca96550546320a847ad"
 metafile = true
 
 [[files]]
 file = "mods/journeymap.pw.toml"
-hash = "fa37926328b6b605cce3ca966e2b50af973a2d1043188da4599f105c2a430606"
+hash = "419059d0b934ffd33b1176dfb92615ff013a29b96b5edf78e5876b58940964b7"
 metafile = true
 
 [[files]]
 file = "mods/lithium.pw.toml"
-hash = "0e87ab10adb3db84b1d6d2ce8bdd7158878b56c965055056b10ad6cde2634568"
+hash = "8c7aec9e376eb3f10da62109594e1ac6b7bc92da8e9c080f8f8f5a736051f339"
+metafile = true
+
+[[files]]
+file = "mods/mezzconfig.pw.toml"
+hash = "36faa2e162b3de9e17e5e7beb6a8e3e23ff8d9e54acd202b0435b10747a86701"
 metafile = true
 
 [[files]]
 file = "mods/spark.pw.toml"
-hash = "c073f13897a838e3c409e46b8a1d8cb510d6a6584dd815aeadaf4886f1779513"
+hash = "fc9e8b3b78f2b454d260f7cefa26834a352e146cdcfd44a6637544df335087a1"
 metafile = true
