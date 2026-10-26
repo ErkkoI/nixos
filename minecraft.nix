@@ -17,7 +17,7 @@ let
   };
   pack_path = ./modpack;
   modpack = pkgs.fetchPackwizModpack {
-    url = "file://${pack_path}/pack.toml";
+    url = "https://github.com/ErkkoI/nixos/raw/main/modpack/pack.toml";
     packHash = "";
     manifestHash = "";
   };
