@@ -15,8 +15,9 @@ let
     ];
     jdk = pkgs.jdk_headless;
   };
+  pack_path = ./modpack;
   modpack = pkgs.fetchPackwizModpack {
-    url = "file://./modpack/pack.toml";
+    url = "file://${pack_path}/pack.toml";
     packHash = "";
     manifestHash = "";
   };
