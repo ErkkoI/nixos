@@ -5,7 +5,7 @@
   ...
 }:
 let
-  minecraft_jre = pkgs.jdk;
+  #minecraft_jre = pkgs.jdk;
   #jre_minimal.override {
   #  modules = [
   #    "java.base"
@@ -21,9 +21,9 @@ let
     packHash = "sha256-R4KMH2J+zwYgCo9aC3ncPhlkxyMtpUbFDi2hIdMiXlU=";
     manifestHash = "sha256:0wz247zfs1w6agxpmlrybfisyq1n2l4x2r1djym3lrw5gpgv1bf7";
   };
-  mcVersion = modpack.manifest.versions.minecraft;
-  fabricVersion = modpack.manifest.versions.fabric;
-  serverVersion = lib.replaceStrings [ "." ] [ "_" ] "fabric-${mcVersion}";
+  #mcVersion = modpack.manifest.versions.minecraft;
+  #fabricVersion = modpack.manifest.versions.fabric;
+  #serverVersion = lib.replaceStrings [ "." ] [ "_" ] "fabric-${mcVersion}";
 in
 {
   networking.firewall.allowedTCPPorts = [ 25565 ];
@@ -34,9 +34,9 @@ in
     servers.joulupojat = {
       enable = true;
       autoStart = false;
-      package = pkgs.fabricServers.${serverVersion}.override {
-        loaderVersion = fabricVersion;
-        jre_headless = minecraft_jre;
+      package = pkgs.fabricServers.fabric-26_3.override {
+        loaderVersion = "0.20.1";
+        # jre_headless = minecraft_jre;
       };
       whitelist = {
         ukimies = "f5e5eb08-eb21-40a0-8b62-486f4b6f8559";
