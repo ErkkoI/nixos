@@ -5,7 +5,7 @@
   ...
 }:
 let
-  minecraft_jre = pkgs.jdk_headless;
+  minecraft_jre = pkgs.jdk25_headless;
   #jre_minimal.override {
   #  modules = [
   #    "java.base"
@@ -19,7 +19,8 @@ let
   modpack = pkgs.fetchPackwizModpack {
     url = "https://github.com/ErkkoI/nixos/raw/main/modpack_old/pack.toml";
     packHash = "sha256-QjOSVdqDSr/xaTi8cDzNqo19Vt32H1dO/HV55MOtDCE=";
-    manifestHash = "sha256:0ckj105ayral2wmj9l8qgikqj2piqcq50kxj80wyvmz1f87ji5h1";
+    manifestHash = "sha256:0ckj105ayral2wmj9l8qgikqj2piqcq50kxj80wyvmz1f87ji5h1
+";
   };
   mcVersion = modpack.manifest.versions.minecraft;
   fabricVersion = modpack.manifest.versions.fabric;
