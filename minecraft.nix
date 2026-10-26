@@ -14,7 +14,7 @@ let
   #    "java.xml"
   #    "jdk.jfr"
   #  ];
-  #  jdk = pkgs.jdk_headless;
+  #  jdk = pkgs.jdk25_headless;
   #};
   modpack = pkgs.fetchPackwizModpack {
     url = "https://github.com/ErkkoI/nixos/raw/main/modpack_old/pack.toml";
