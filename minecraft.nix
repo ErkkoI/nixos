@@ -56,7 +56,7 @@ in
         enable-rcon = false;
         enable-query = false;
       };
-      jvmOpts = "-Xmx2560M -Xms2560M -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication -XX:+PerfDisableSharedMem";
+      jvmOpts = "-Xmx2048M -Xms2048M -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication -XX:+PerfDisableSharedMem";
       symlinks = {
         "mods" = "${modpack}/mods";
       };
