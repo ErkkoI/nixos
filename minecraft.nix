@@ -11,6 +11,7 @@ let
      "java.desktop"
      "java.management"
      "java.xml"
+     "java.logging"
      "jdk.jfr"
     ];
    jdk = pkgs.jdk25_headless;
