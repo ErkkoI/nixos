@@ -18,6 +18,7 @@ let
      "java.compiler"
      "jdk.unsupported"
      "java.net.http"
+     "jdk.management"
     ];
    jdk = pkgs.jdk25_headless;
   };
