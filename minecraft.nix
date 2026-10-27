@@ -12,6 +12,7 @@ let
      "java.management"
      "java.xml"
      "java.logging"
+     "java.sql"
      "jdk.jfr"
      "jdk.zipfs"
     ];
