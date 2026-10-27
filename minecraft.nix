@@ -25,7 +25,7 @@ let
   modpack = pkgs.fetchPackwizModpack {
     url = "https://github.com/ErkkoI/nixos/raw/main/modpack_old/pack.toml";
     packHash = "";
-    manifestHash = "";
+    manifestHash = "sha256:1c1n7dazfc35zqsfricmcv55szzz4fzr1vhil1h5mhi1slk6za1a";
   };
   mcVersion = modpack.manifest.versions.minecraft;
   fabricVersion = modpack.manifest.versions.fabric;
