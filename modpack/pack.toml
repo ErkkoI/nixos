@@ -1,12 +1,11 @@
-name = "joulupojat"
-author = "erkkoi"
+name = "Modpack Old"
 version = "1.0.0"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "9dd9df49b025ad6286889896440d36ec1d1b96cdece34dce4c6a9fd240768bba"
+hash = "bf0fdadf36406ff29825ade279a52c08fd52d337054c249e31dbe328ca6230d0"
 
 [versions]
 fabric = "0.20.1"
