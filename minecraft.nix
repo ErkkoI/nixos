@@ -13,6 +13,7 @@ let
      "java.xml"
      "java.logging"
      "jdk.jfr"
+     "jdk.zipfs"
     ];
    jdk = pkgs.jdk25_headless;
   };
