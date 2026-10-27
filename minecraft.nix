@@ -16,6 +16,7 @@ let
      "jdk.jfr"
      "jdk.zipfs"
      "java.compiler"
+     "jdk.unsupported"
     ];
    jdk = pkgs.jdk25_headless;
   };
