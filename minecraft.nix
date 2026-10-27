@@ -17,6 +17,7 @@ let
      "jdk.zipfs"
      "java.compiler"
      "jdk.unsupported"
+     "java.net.http"
     ];
    jdk = pkgs.jdk25_headless;
   };
