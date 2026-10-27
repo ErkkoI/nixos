@@ -15,6 +15,7 @@ let
      "java.sql"
      "jdk.jfr"
      "jdk.zipfs"
+     "java.compiler"
     ];
    jdk = pkgs.jdk25_headless;
   };
