@@ -22,8 +22,8 @@ let
     jdk = pkgs.jdk25_headless;
   };
   modpack = pkgs.callPackage ./modpack { };
-  mcVersion = modpack.manifest.versions.minecraft;
-  fabricVersion = modpack.manifest.versions.fabric;
+  mcVersion = modpack.pack.versions.minecraft;
+  fabricVersion = modpack.pack.versions.fabric;
   serverVersion = lib.replaceString "." "_" "fabric-${mcVersion}";
   serverPort = 25565;
 in
