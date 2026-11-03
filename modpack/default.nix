@@ -22,7 +22,7 @@ let
         name = targetFile;
         path = fetchurl {
           url = meta.download.url;
-          hash = "${meta.download.hash-format}-${meta.download.hash}";
+          ${meta.download.hash-format} = meta.download.hash;
         };
       }
     else
