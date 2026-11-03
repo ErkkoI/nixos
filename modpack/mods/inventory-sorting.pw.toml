@@ -4,8 +4,8 @@ side = "both"
 
 [download]
 url = "https://cdn.modrinth.com/data/5ibSyLAz/versions/SJkiyopK/inventorysorter-fabric-3.0.1%2Bmc26.3.jar"
-hash-format = "sha512"
-hash = "712d4cda1e91d59c7e9cac876df1e37fb8e82afa0afff666a88e63eb7dd9dbad4b32c83eb98b01f6c07863d9b2ff844f79526cd806b0a69fe0c60e6ca220f12e"
+hash-format = "sha256"
+hash = "954f55f552094c4a8b5cef660c6bf3448666c8d0a9d95891c362afd68552d94f"
 
 [update]
 [update.modrinth]
