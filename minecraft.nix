@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   ...
@@ -7,32 +6,29 @@
 let
   minecraft_jre = pkgs.jre25_minimal.override {
     modules = [
-     "java.base"
-     "java.desktop"
-     "java.management"
-     "java.xml"
-     "java.logging"
-     "java.sql"
-     "jdk.jfr"
-     "jdk.zipfs"
-     "java.compiler"
-     "jdk.unsupported"
-     "java.net.http"
-     "jdk.management"
+      "java.base"
+      "java.desktop"
+      "java.management"
+      "java.xml"
+      "java.logging"
+      "java.sql"
+      "java.compiler"
+      "java.net.http"
+      "jdk.jfr"
+      "jdk.zipfs"
+      "jdk.unsupported"
+      "jdk.management"
     ];
-   jdk = pkgs.jdk25_headless;
+    jdk = pkgs.jdk25_headless;
   };
-  modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/ErkkoI/nixos/raw/main/modpack/pack.toml";
-    packHash = "sha256-88i/EbXScYPHnKbhr6hL5hvOH8IFwRvDajY+CP0wnj4=";
-    manifestHash = "sha256:1c1n7dazfc35zqsfricmcv55szzz4fzr1vhil1h5mhi1slk6za1a";
-  };
+  modpack = pkgs.callPackage ./modpack { };
   mcVersion = modpack.manifest.versions.minecraft;
   fabricVersion = modpack.manifest.versions.fabric;
-  serverVersion = lib.replaceStrings [ "." ] [ "_" ] "fabric-${mcVersion}";
+  serverVersion = lib.replaceString "." "_" "fabric-${mcVersion}";
+  serverPort = 25565;
 in
 {
-  networking.firewall.allowedTCPPorts = [ 25565 ];
+  networking.firewall.allowedTCPPorts = [ serverPort ];
   services.minecraft-servers = {
     enable = true;
     eula = true;
@@ -40,7 +36,7 @@ in
     servers.joulupojat = {
       enable = true;
       autoStart = false;
-      package = pkgs.fabricServers.${serverVersion}.override {
+      package = pkgs.minecraftServers.${serverVersion}.override {
         loaderVersion = fabricVersion;
         jre_headless = minecraft_jre;
       };
@@ -58,14 +54,12 @@ in
         white-list = true;
         enforce-whitelist = true;
         online-mode = true;
-        server-port = 25565;
+        server-port = serverPort;
         enable-rcon = false;
         enable-query = false;
       };
       jvmOpts = "-Xmx2560M -Xms2560M -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication -XX:+PerfDisableSharedMem";
-      symlinks = {
-        mods = "${modpack}/mods";
-      };
+      symlinks.mods = "${modpack}/mods";
     };
   };
 }
