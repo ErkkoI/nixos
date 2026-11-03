@@ -18,6 +18,7 @@
   ];
   nix.gc.options = "--delete-older-than 7d";
   nix.settings.auto-optimise-store = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   system.autoUpgrade = {
     enable = true;
     # Disable adding the --upgrade flag. Not used with flakes.
@@ -62,6 +63,8 @@
   };
   environment.systemPackages = with pkgs; [
     gitMinimal
+    btop
+    fastfetch
   ];
   system.stateVersion = "26.05";
 }
