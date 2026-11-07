@@ -17,19 +17,40 @@
       nix-minecraft,
       ...
     }:
+    let
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
+    in
     {
-      nixosConfigurations.pannu = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          disko.nixosModules.disko
-          nix-minecraft.nixosModules.minecraft-servers
-          {
-            nixpkgs.overlays = [ nix-minecraft.overlay ];
-            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-              "minecraft-server"
-            ];
-          }
-          ./configuration.nix
+      nixosConfigurations = {
+        pannu = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            nix-minecraft.nixosModules.minecraft-servers
+            {
+              nixpkgs.overlays = [ nix-minecraft.overlay ];
+              nixpkgs.config.allowUnfreePredicate =
+                pkg:
+                builtins.elem (nixpkgs.lib.getName pkg) [
+                  "minecraft-server"
+                ];
+            }
+            ./pannu.nix
+          ];
+        };
+        "pönttö" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            "./pönttö.nix"  
+          ];
+        };
+      };
+      devShells.x86_64-linux.default = pkgs.mkShellNoCC {
+        packages = with pkgs; [
+          helix
+          nixfmt
+          nixd
         ];
       };
     };

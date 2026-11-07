@@ -7,7 +7,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./disk-config.nix
+    ./disk-config-pannu.nix
     ./caddy.nix
     ./opencloud.nix
     ./minecraft.nix
@@ -53,6 +53,7 @@
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBPsGRR6hn6KG6/qlGejQXeP2pAe811qJFuEoMFdznNv"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqwBPCqs921XN4mRHfJDy64x47t6n0SXoSDaPFlWnGH"
     ];
   };
   security.sudo.wheelNeedsPassword = false;
