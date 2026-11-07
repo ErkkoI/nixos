@@ -5,6 +5,17 @@
 }:
 {
   imports = [ ./disk-config-torni.nix ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    branch = "legacy_580";
+  };
   boot = {
     initrd.systemd.enable = true;
     loader.systemd-boot.enable = true;

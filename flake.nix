@@ -41,6 +41,7 @@
         torni = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            { nixpkgs.config.allowUnfree = true; }
             disko.nixosModules.disko
             ./torni.nix
           ];
