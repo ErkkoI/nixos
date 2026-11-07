@@ -9,7 +9,8 @@
     loader.systemd-boot.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
   };
-  networking.hostName = "pönttö";
+  networking.hostName = "torni";
+  networking.networkmanager.enable = true;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

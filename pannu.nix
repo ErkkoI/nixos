@@ -18,6 +18,7 @@
   ];
   nix.gc.options = "--delete-older-than 7d";
   nix.settings.auto-optimise-store = true;
+  services.fail2ban.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   system.autoUpgrade = {
     enable = true;
