@@ -38,11 +38,11 @@
             ./pannu.nix
           ];
         };
-        "pönttö" = nixpkgs.lib.nixosSystem {
+        torni = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             disko.nixosModules.disko
-            "./pönttö.nix"  
+            ./torni.nix
           ];
         };
       };
