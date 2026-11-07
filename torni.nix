@@ -81,7 +81,7 @@
             updates_disabled = true;
           };
         };
-    };
+    
     "3rdparty".Extensions = {
       "uBlock0@raymondhill.net".adminSettings = {
         userSettings = {
@@ -91,6 +91,7 @@
           cloudStorageEnabled = lib.mkForce false;
         };
       };
+    };
     };
     profiles.default.search = {
       force = true;
