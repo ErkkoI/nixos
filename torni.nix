@@ -4,6 +4,7 @@
   ...
 }:
 {
+  imports = [ ./disk-config-torni.nix ];
   boot = {
     initrd.systemd.enable = true;
     loader.systemd-boot.enable = true;
@@ -81,22 +82,17 @@
             updates_disabled = true;
           };
         };
-    
-    "3rdparty".Extensions = {
-      "uBlock0@raymondhill.net".adminSettings = {
-        userSettings = {
-          uiTheme = "dark";
-          uiAccentCustom = true;
-          uiAccentCustom0 = "#8300ff";
-          cloudStorageEnabled = lib.mkForce false;
+
+      "3rdparty".Extensions = {
+        "uBlock0@raymondhill.net".adminSettings = {
+          userSettings = {
+            uiTheme = "dark";
+            uiAccentCustom = true;
+            uiAccentCustom0 = "#8300ff";
+            cloudStorageEnabled = lib.mkForce false;
+          };
         };
       };
-    };
-    };
-    profiles.default.search = {
-      force = true;
-      default = "ddg";
-      privateDefault = "ddg";
     };
   };
   users.users.erkkoi = {
