@@ -40,7 +40,12 @@
     "flakes"
   ];
   nix.settings.auto-optimise-store = true;
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting
+    '';
+  };
   programs.firefox = {
     enable = true;
     nativeMessagingHosts.packages = [ pkgs.kdePackages.plasma-browser-integration ];
@@ -124,7 +129,6 @@
       "wheel"
       "networkmanager"
     ];
-    shell = pkgs.fish;
   };
   security.sudo.wheelNeedsPassword = false;
   services.btrfs.autoScrub = {
