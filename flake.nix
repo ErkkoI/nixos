@@ -52,6 +52,7 @@
           helix
           nixfmt
           nixd
+          packwiz
         ];
       };
     };
