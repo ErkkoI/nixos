@@ -8,6 +8,12 @@
     ./disk-config-torni.nix
     ./hardware-configuration-torni.nix
   ];
+  time.timeZone = "Europe/Helsinki";
+  i18n.defaultLocale = "fi_FI.UTF-8";
+  services.xserver = {
+    layout = "fi";
+  }
+  console.keyMap = "fi";
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -25,7 +31,10 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
   networking.hostName = "torni";
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = false;
+  };
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
