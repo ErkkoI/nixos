@@ -12,7 +12,7 @@
   i18n.defaultLocale = "fi_FI.UTF-8";
   services.xserver = {
     layout = "fi";
-  }
+  };
   console.keyMap = "fi";
   hardware.graphics = {
     enable = true;
