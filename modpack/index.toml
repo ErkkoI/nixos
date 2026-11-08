@@ -26,7 +26,7 @@ metafile = true
 
 [[files]]
 file = "mods/fabric-api.pw.toml"
-hash = "e808851aee55c686c6a5faebe84c779a18ccb7e05e062e6be4a8778a5cb5c18c"
+hash = "79de372a05dde6ee4f23ced936835dbd9d43b64ba61ae1990cb0e59dce460e6a"
 metafile = true
 
 [[files]]
@@ -41,7 +41,7 @@ metafile = true
 
 [[files]]
 file = "mods/jei.pw.toml"
-hash = "0ebbeafc36c57be2c9040b4e0e005b5ed21280742a4b7b5ad35fc2f0c0b8463a"
+hash = "742b12928fa5f288671d113e7aa3bf18d83219f7e064964b84f61050f314df2e"
 metafile = true
 
 [[files]]
@@ -51,12 +51,12 @@ metafile = true
 
 [[files]]
 file = "mods/lithium.pw.toml"
-hash = "8eac76d6430d0d062a42d781cbb18c3ad41196c7b855ed6737269bfc3a4275cc"
+hash = "b44f3ab71e52f1aaae97cf8644f2316042de8b7777d6b6794567c8c7d220bd2b"
 metafile = true
 
 [[files]]
 file = "mods/mezzconfig.pw.toml"
-hash = "c8b112f34ffdc536e07ccbd16e21a9a4ad03c2bd7071967fb55fe7841f8c9bec"
+hash = "4e688181cb533c4d7921cb411db3e3bb0bf0e0abfd180bf4d66af6f044bb0d7a"
 metafile = true
 
 [[files]]
