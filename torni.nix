@@ -4,7 +4,10 @@
   ...
 }:
 {
-  imports = [ ./disk-config-torni.nix ];
+  imports = [
+    ./disk-config-torni.nix
+    ./hardware-configuration-torni.nix
+  ];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -147,6 +150,7 @@
     opencloud-desktop
     btop
     fastfetch
+    github-cli
   ];
   system.stateVersion = "26.05";
 }
