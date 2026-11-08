@@ -117,6 +117,7 @@
     ];
     shell = pkgs.fish;
   };
+  security.sudo.wheelNeedsPassword = false;
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
@@ -151,6 +152,7 @@
     btop
     fastfetch
     github-cli
+    helix
   ];
   system.stateVersion = "26.05";
 }
