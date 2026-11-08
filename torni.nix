@@ -10,22 +10,21 @@
   ];
   time.timeZone = "Europe/Helsinki";
   i18n = {
-    defaultLocale = "fi_FI.UTF-8";
-    extraLocales = [ "en_US.UTF-8/UTF-8" "fi_FI.UTF-8/UTF-8" ];
+    defaultLocale = "en_US.UTF-8";
+    extraLocales = [ "fi_FI.UTF-8/UTF-8" ];
   };
   i18n.extraLocaleSettings = {
-    LC_ALL = "fi_FI.UTF-8";
-    # LC_CTYPE = "en_US.UTF8";
-    # LC_ADDRESS = "es_VE.UTF-8";
-    # LC_MEASUREMENT = "es_VE.UTF-8";
-    # LC_MESSAGES = "en_US.UTF-8";
-    # LC_MONETARY = "es_VE.UTF-8";
-    # LC_NAME = "es_VE.UTF-8";
-    # LC_NUMERIC = "en_US.UTF-8";
-    # LC_PAPER = "es_VE.UTF-8";
-    # LC_TELEPHONE = "es_VE.UTF-8";
-    # LC_TIME = "es_VE.UTF-8";
-    # LC_COLLATE = "es_VE.UTF-8";
+    LC_CTYPE = "en_US.UTF8";
+    LC_ADDRESS = "fi_FI.UTF-8";
+    LC_MEASUREMENT = "fi_FI.UTF-8";
+    LC_MESSAGES = "en_US.UTF-8";
+    LC_MONETARY = "fi_FI.UTF-8";
+    LC_NAME = "fi_FI.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "fi_FI.UTF-8";
+    LC_TELEPHONE = "fi_FI.UTF-8";
+    LC_TIME = "fi_FI.UTF-8";
+    LC_COLLATE = "fi_FI.UTF-8";
   };
   services.xserver.xkb = {
     layout = "fi";
@@ -47,10 +46,12 @@
     loader.systemd-boot.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
   };
-  networking.hostName = "torni";
-  networking.networkmanager = {
-    enable = true;
-    wifi.powersave = false;
+  networking = {
+    hostName = "torni";
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+    };
   };
   nix.settings.experimental-features = [
     "nix-command"
