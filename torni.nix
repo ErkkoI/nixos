@@ -9,8 +9,25 @@
     ./hardware-configuration-torni.nix
   ];
   time.timeZone = "Europe/Helsinki";
-  i18n.defaultLocale = "fi_FI.UTF-8";
-  services.xserver = {
+  i18n = {
+    defaultLocale = "fi_FI.UTF-8";
+    extraLocales = [ "en_US.UTF-8/UTF-8" "fi_FI.UTF-8/UTF-8" ];
+  };
+  i18n.extraLocaleSettings = {
+    LC_ALL = "fi_FI.UTF-8";
+    # LC_CTYPE = "en_US.UTF8";
+    # LC_ADDRESS = "es_VE.UTF-8";
+    # LC_MEASUREMENT = "es_VE.UTF-8";
+    # LC_MESSAGES = "en_US.UTF-8";
+    # LC_MONETARY = "es_VE.UTF-8";
+    # LC_NAME = "es_VE.UTF-8";
+    # LC_NUMERIC = "en_US.UTF-8";
+    # LC_PAPER = "es_VE.UTF-8";
+    # LC_TELEPHONE = "es_VE.UTF-8";
+    # LC_TIME = "es_VE.UTF-8";
+    # LC_COLLATE = "es_VE.UTF-8";
+  };
+  services.xserver.xkb = {
     layout = "fi";
   };
   console.keyMap = "fi";
