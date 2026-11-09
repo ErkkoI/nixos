@@ -11,7 +11,10 @@
   time.timeZone = "Europe/Helsinki";
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    extraLocales = [ "en_SE.UTF-8/UTF-8" "fi_FI.UTF-8/UTF-8" "en_US.UTF-8" ];
+    extraLocales = [
+      "fi_FI.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
+    ];
   };
   i18n.extraLocaleSettings = {
     LANG = "en_US.UTF-8";
@@ -24,7 +27,7 @@
     LC_NUMERIC = "en_US.UTF-8";
     LC_PAPER = "fi_FI.UTF-8";
     LC_TELEPHONE = "fi_FI.UTF-8";
-    LC_TIME = "en_SE.UTF-8";
+    LC_TIME = "fi_FI.UTF-8";
     LC_COLLATE = "fi_FI.UTF-8";
   };
   services.xserver.xkb = {
@@ -59,6 +62,11 @@
     "flakes"
   ];
   nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
