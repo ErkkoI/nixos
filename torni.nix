@@ -73,6 +73,7 @@
       set fish_greeting
     '';
   };
+  programs.steam.enable = true;
   programs.firefox = {
     enable = true;
     nativeMessagingHosts.packages = [ pkgs.kdePackages.plasma-browser-integration ];
