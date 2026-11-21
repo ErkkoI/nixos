@@ -46,7 +46,6 @@
     branch = "legacy_580";
   };
   boot = {
-    initrd.systemd.enable = true;
     loader.systemd-boot.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
   };
@@ -195,6 +194,7 @@
     github-cli
     helix
     musescore
+    antigravity-cli
   ];
   system.stateVersion = "26.05";
 }

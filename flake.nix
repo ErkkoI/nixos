@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
+    nixpkgs-unstable.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +16,7 @@
       nixpkgs,
       disko,
       nix-minecraft,
+      nixpkgs-unstable,
       ...
     }:
     let
@@ -38,11 +40,11 @@
             ./pannu.nix
           ];
         };
-        torni = nixpkgs.lib.nixosSystem {
+        torni = nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            { nixpkgs.config.allowUnfree = true; }
             disko.nixosModules.disko
+            { nixpkgs.config.allowUnfree = true; }
             ./torni.nix
           ];
         };
