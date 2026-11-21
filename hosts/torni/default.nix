@@ -46,6 +46,7 @@
   boot = {
     loader.systemd-boot = {
       enable = true;
+      editor = false;
       configurationLimit = 10;
     };
   };
@@ -76,6 +77,7 @@
     preferences = {
       "widget.use-xdg-desktop-portal.file-picker" = 1;
       "privacy.resistFingerprinting" = true;
+      "dom.security.https_only_mode" = true;
     };
     policies = {
       # Updates & Background Services
@@ -83,7 +85,6 @@
       BackgroundAppUpdate = false;
 
       # Feature Disabling
-      DisableBuiltinPDFViewer = true;
       DisableFirefoxStudies = true;
       DisableFirefoxAccounts = true;
       DisableFirefoxScreenshots = true;
@@ -113,14 +114,6 @@
           "*".installation_mode = "blocked";
           "uBlock0@raymondhill.net" = {
             install_url = moz "ublock-origin";
-            installation_mode = "force_installed";
-          };
-          "jid1-BoFifL9Vbdl2zQ@jetpack" = {
-            install_url = moz "decentraleyes";
-            installation_mode = "force_installed";
-          };
-          "jid1-MnnxcxisBPnSXQ@jetpack" = {
-            install_url = moz "privacy-badger17";
             installation_mode = "force_installed";
           };
           "keepassxc-browser@keepassxc.org" = {
