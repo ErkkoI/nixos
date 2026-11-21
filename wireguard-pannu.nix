@@ -17,16 +17,16 @@ in
       inherit listenPort privateKeyFile;
       peers = [
         # Add each peer's public key after bootstrapping, then rebuild pannu.
-        # {
-        #   name = "torni";
-        #   publicKey = "<contents of torni /var/lib/secrets/wireguard-wg0.pub>";
-        #   allowedIPs = [ "10.100.0.2/32" ];
-        # }
-        # {
-        #   name = "iphone";
-        #   publicKey = "<WireGuard iOS app public key>";
-        #   allowedIPs = [ "10.100.0.3/32" ];
-        # }
+        {
+          name = "torni";
+          publicKey = "B09fJo5U1Bcead+4gDtha8eHwuA30Mz//Wktblv4BxQ=";
+          allowedIPs = [ "10.100.0.2/32" ];
+        }
+        {
+          name = "iphone";
+          publicKey = "P/iCtwuTjQenlZ9xvDh9HCC6HV/V8dZwfVHhiFrf23M=";
+          allowedIPs = [ "10.100.0.3/32" ];
+        }
       ];
     };
   };
