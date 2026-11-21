@@ -16,6 +16,7 @@ jobs:
       - uses: cachix/install-nix-action@31.11.3
       - run: nix flake update
       - name: Update t3code-nightly
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -27,6 +28,10 @@ jobs:
           hash=$(nix hash convert --hash-algo sha256 --to sri "$digest")
           sed -i "s|version = \".*\";|version = \"$version\";|" t3code-nightly.nix
           sed -i "s|hash = \".*\";|hash = \"$hash\";|" t3code-nightly.nix
+      - name: Verify NixOS configurations evaluate
+        run: |
+          nix eval .#nixosConfigurations.pannu.config.system.build.toplevel.drvPath
+          nix eval .#nixosConfigurations.torni.config.system.build.toplevel.drvPath
       - uses: stefanzweifel/git-auto-commit-action@v7.2.1
         with:
           commit_message: 'chore(deps): bump flake.lock and t3code-nightly'

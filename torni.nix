@@ -13,12 +13,10 @@
     defaultLocale = "en_US.UTF-8";
     extraLocales = [
       "fi_FI.UTF-8/UTF-8"
-      "en_US.UTF-8/UTF-8"
     ];
   };
   i18n.extraLocaleSettings = {
-    LANG = "en_US.UTF-8";
-    LC_CTYPE = "en_US.UTF8";
+    LC_CTYPE = "en_US.UTF-8";
     LC_ADDRESS = "fi_FI.UTF-8";
     LC_MEASUREMENT = "fi_FI.UTF-8";
     LC_MESSAGES = "en_US.UTF-8";
@@ -40,14 +38,15 @@
   };
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
-    modesetting.enable = true;
     open = false;
-    nvidiaSettings = true;
+    powerManagement.enable = true;
     branch = "legacy_580";
   };
   boot = {
-    loader.systemd-boot.enable = true;
-    kernelPackages = pkgs.linuxPackages_latest;
+    loader.systemd-boot = {
+      enable = true;
+      configurationLimit = 10;
+    };
   };
   networking = {
     hostName = "torni";
@@ -103,12 +102,10 @@
       # Access Restrictions
       BlockAboutConfig = false;
       BlockAboutProfiles = true;
-      BlockAboutSupport = true;
 
       # UI and Behavior
       DisplayMenuBar = "never";
       DontCheckDefaultBrowser = true;
-      HardwareAcceleration = false;
       OfferToSaveLogins = false;
       ExtensionSettings =
         let
@@ -119,22 +116,18 @@
           "uBlock0@raymondhill.net" = {
             install_url = moz "ublock-origin";
             installation_mode = "force_installed";
-            updates_disabled = true;
           };
           "jid1-BoFifL9Vbdl2zQ@jetpack" = {
             install_url = moz "decentraleyes";
             installation_mode = "force_installed";
-            updates_disabled = true;
           };
           "jid1-MnnxcxisBPnSXQ@jetpack" = {
             install_url = moz "privacy-badger17";
             installation_mode = "force_installed";
-            updates_disabled = true;
           };
           "keepassxc-browser@keepassxc.org" = {
             install_url = moz "keepassxc-browser";
             installation_mode = "force_installed";
-            updates_disabled = true;
           };
         };
 

@@ -12,14 +12,15 @@
     ./opencloud.nix
     ./minecraft.nix
   ];
+  time.timeZone = "UTC";
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
   nix.gc.options = "--delete-older-than 7d";
   nix.settings.auto-optimise-store = true;
-  services.fail2ban.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.zswap.enable = true;
+  services.journald.extraConfig = "SystemMaxUse=200M";
   system.autoUpgrade = {
     enable = true;
     # Disable adding the --upgrade flag. Not used with flakes.

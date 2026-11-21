@@ -28,11 +28,10 @@ let
   serverPort = 25565;
 in
 {
-  networking.firewall.allowedTCPPorts = [ serverPort ];
   services.minecraft-servers = {
     enable = true;
     eula = true;
-    openFirewall = false;
+    openFirewall = true;
     servers.joulupojat = {
       enable = true;
       autoStart = false;
@@ -58,7 +57,7 @@ in
         enable-rcon = false;
         enable-query = false;
       };
-      jvmOpts = "-Xmx2560M -Xms2560M -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication -XX:+PerfDisableSharedMem";
+      jvmOpts = "-Xmx2560M -Xms1024M -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication -XX:+PerfDisableSharedMem";
       symlinks.mods = "${modpack}/mods";
     };
   };
