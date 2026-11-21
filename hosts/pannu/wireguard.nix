@@ -5,10 +5,18 @@ let
   listenPort = 51820;
 in
 {
-  # Forward traffic between WireGuard peers (e.g. iPhone <-> torni) through pannu.
+  # Forward only explicitly allowed peer-to-peer traffic (iPhone -> torni t3code)
+  # over WireGuard, dropping all other forwarded packets via nftables.
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
-  networking.firewall.allowedUDPPorts = [ listenPort ];
+  networking.nftables.enable = true;
+  networking.firewall = {
+    allowedUDPPorts = [ listenPort ];
+    filterForward = true;
+    extraForwardRules = ''
+      iifname "wg0" oifname "wg0" ip saddr 10.100.0.3 ip daddr 10.100.0.2 tcp dport 3773 accept
+    '';
+  };
 
   networking.wireguard = {
     enable = true;

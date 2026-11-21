@@ -7,14 +7,12 @@ in
   # Keep NetworkManager from taking over the NixOS-managed WireGuard interface.
   networking.networkmanager.unmanaged = [ "interface-name:wg0" ];
 
-  # Allow t3code (default port 3773, plus fallback ports for multiple instances)
-  # strictly over the authenticated WireGuard interface.
-  networking.firewall.interfaces.wg0.allowedTCPPortRanges = [
-    {
-      from = 3773;
-      to = 3783;
-    }
-  ];
+  # Allow t3code (port 3773) over WireGuard strictly from the iPhone peer so
+  # pannu cannot initiate connections to torni.
+  networking.nftables.enable = true;
+  networking.firewall.extraInputRules = ''
+    iifname "wg0" ip saddr 10.100.0.3 tcp dport 3773 accept
+  '';
 
   networking.wireguard = {
     enable = true;
