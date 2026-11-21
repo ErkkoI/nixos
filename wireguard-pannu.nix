@@ -24,7 +24,7 @@ in
         }
         {
           name = "iphone";
-          publicKey = "P/iCtwuTjQenlZ9xvDh9HCC6HV/V8dZwfVHhiFrf23M=";
+          publicKey = "P/iCtwuTjQenIZ9xvDh9HCC6HV/V8dZwfVHhiFrf23M=";
           allowedIPs = [ "10.100.0.3/32" ];
         }
       ];
