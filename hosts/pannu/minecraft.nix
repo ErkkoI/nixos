@@ -89,14 +89,11 @@ in
     };
   };
 
-  # Skip automatic builds and reboots while a Minecraft server is running.
+  # Skip automatic upgrades and reboots while a Minecraft server is running.
   systemd.services = {
     nixos-upgrade.serviceConfig = {
       ExecCondition = [ "${ensureMinecraftStopped}" ];
       ExecStartPost = [ "${cancelRebootIfMinecraftRunning}" ];
-    };
-    torni-cache-build.serviceConfig = {
-      ExecCondition = [ "${ensureMinecraftStopped}" ];
     };
   };
 }

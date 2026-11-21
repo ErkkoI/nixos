@@ -11,8 +11,6 @@
     ./caddy.nix
     ./opencloud.nix
     ./minecraft.nix
-    ./torni-cache.nix
-    ./t3code.nix
     ./wireguard.nix
   ];
   time.timeZone = "UTC";

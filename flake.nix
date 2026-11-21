@@ -31,7 +31,6 @@
       nixosConfigurations = {
         pannu = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit pkgsUnstable; };
           modules = [
             disko.nixosModules.disko
             nix-minecraft.nixosModules.minecraft-servers

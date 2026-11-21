@@ -56,15 +56,6 @@
       wifi.powersave = false;
     };
   };
-  nix.settings = {
-    connect-timeout = 5;
-    extra-substituters = [
-      "ssh-ng://nix-cache@erkkoihalainen.fi?priority=50&ssh-key=/var/lib/secrets/nix-cache-ssh-key"
-    ];
-    extra-trusted-public-keys = [
-      "pannu-1:QRqJH6Lc3N7PgltVmxkC7D5api3rdsJW85NWs4aidIY="
-    ];
-  };
   programs.ssh.knownHosts."erkkoihalainen.fi".publicKey =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIm93qernemJYeypgIbqxVzYY2ki9FH57L2rL2K5qa6L";
   nix.gc = {
