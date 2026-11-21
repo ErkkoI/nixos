@@ -11,6 +11,7 @@
     ./caddy.nix
     ./opencloud.nix
     ./minecraft.nix
+    ./torni-cache.nix
   ];
   time.timeZone = "UTC";
   nix.settings.experimental-features = [

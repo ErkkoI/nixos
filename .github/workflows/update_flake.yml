@@ -20,14 +20,50 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          release=$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
+          set -euo pipefail
+          trap 'git checkout -- t3code-nightly/' ERR
+
+          version=$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
             "https://api.github.com/repos/pingdotgg/t3code/releases?per_page=100" \
-            | jq -er '[.[] | select((.draft | not) and .prerelease and (.tag_name | test("^v.*-nightly\\.")) and any(.assets[]; .name == "T3-Code-Nightly-x86_64.AppImage" and (.digest // "" | startswith("sha256:"))))][0]')
-          version=$(echo "$release" | jq -er '.tag_name | ltrimstr("v")')
-          digest=$(echo "$release" | jq -er '.assets[] | select(.name == "T3-Code-Nightly-x86_64.AppImage") | .digest | ltrimstr("sha256:")')
-          hash=$(nix hash convert --hash-algo sha256 --to sri "$digest")
-          sed -i "s|version = \".*\";|version = \"$version\";|" t3code-nightly.nix
-          sed -i "s|hash = \".*\";|hash = \"$hash\";|" t3code-nightly.nix
+            | jq -er '[.[] | select((.draft | not) and .prerelease and (.tag_name | test("^v.*-nightly\\.")))][0].tag_name | ltrimstr("v")')
+
+          current=$(sed -n 's/^[[:space:]]*version = "\(.*\)";/\1/p' t3code-nightly/unwrapped.nix | head -n1)
+          if [ "$version" = "$current" ]; then
+            echo "t3code-nightly is already at $version"
+            exit 0
+          fi
+
+          src_hash=$(nix store prefetch-file --unpack --json \
+            "https://github.com/pingdotgg/t3code/archive/refs/tags/v${version}.tar.gz" \
+            | jq -er '.hash')
+
+          sed -i "0,/version = \".*\";/s|version = \".*\";|version = \"$version\";|" t3code-nightly/unwrapped.nix
+          sed -i "/fetchFromGitHub {/,/};/s|hash = \".*\";|hash = \"$src_hash\";|" t3code-nightly/unwrapped.nix
+
+          resolve_fod_hash() {
+            local attr="$1"
+            local output
+            if output=$(nix build --no-link "$attr" 2>&1); then
+              return 0
+            fi
+            local got
+            got=$(printf '%s\n' "$output" | sed -n 's/^[[:space:]]*got:[[:space:]]*\(sha256-[A-Za-z0-9+\/=]*\)$/\1/p' | tail -n1)
+            if [ -z "$got" ]; then
+              printf '%s\n' "$output" >&2
+              return 1
+            fi
+            printf '%s\n' "$got"
+          }
+
+          pnpm_hash=$(resolve_fod_hash .#t3code-nightly.unwrapped.pnpmDeps)
+          if [ -n "$pnpm_hash" ]; then
+            sed -i "/fetchPnpmDeps {/,/};/s|hash = \".*\";|hash = \"$pnpm_hash\";|" t3code-nightly/unwrapped.nix
+          fi
+
+          cargo_hash=$(resolve_fod_hash .#t3code-nightly.resourceMonitor.cargoDeps)
+          if [ -n "$cargo_hash" ]; then
+            sed -i "s|cargoHash = \".*\";|cargoHash = \"$cargo_hash\";|" t3code-nightly/resource-monitor.nix
+          fi
       - name: Verify NixOS configurations evaluate
         run: |
           nix eval .#nixosConfigurations.pannu.config.system.build.toplevel.drvPath
@@ -38,6 +74,6 @@ jobs:
           commit_user_name: Flake Bot Update
           commit_author: Flake Bot Update <actions@github.com>
           branch: main
-          file_pattern: flake.lock t3code-nightly.nix
+          file_pattern: flake.lock t3code-nightly/unwrapped.nix t3code-nightly/resource-monitor.nix
           skip_dirty_check: false
           skip_fetch: true
