@@ -12,6 +12,7 @@
     ./opencloud.nix
     ./minecraft.nix
     ./torni-cache.nix
+    ./wireguard-pannu.nix
   ];
   time.timeZone = "UTC";
   nix.settings.experimental-features = [

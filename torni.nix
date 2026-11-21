@@ -7,6 +7,7 @@
   imports = [
     ./disk-config-torni.nix
     ./hardware-configuration-torni.nix
+    ./wireguard-torni.nix
   ];
   time.timeZone = "Europe/Helsinki";
   i18n = {
