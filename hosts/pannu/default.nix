@@ -17,6 +17,7 @@
   ];
   time.timeZone = "UTC";
   nix.gc.options = "--delete-older-than 7d";
+  nix.settings.max-jobs = 1;
   boot.zswap.enable = true;
   services.journald.extraConfig = "SystemMaxUse=200M";
   system.autoUpgrade = {
