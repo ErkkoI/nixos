@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -26,6 +27,32 @@ let
   fabricVersion = modpack.pack.versions.fabric;
   serverVersion = lib.replaceString "." "_" "fabric-${mcVersion}";
   serverPort = 25565;
+
+  minecraftServices = lib.mapAttrsToList (name: _: "minecraft-server-${name}.service") (
+    lib.filterAttrs (_: server: server.enable) config.services.minecraft-servers.servers
+  );
+
+  ensureMinecraftStopped = pkgs.writeShellScript "ensure-minecraft-stopped" ''
+    set -euo pipefail
+    for unit in ${lib.escapeShellArgs minecraftServices}; do
+      state="$(${config.systemd.package}/bin/systemctl is-active "$unit" || true)"
+      case "$state" in
+        inactive|failed) ;;
+        *)
+          echo "Skipping: $unit is $state"
+          exit 1
+          ;;
+      esac
+    done
+  '';
+
+  cancelRebootIfMinecraftRunning = pkgs.writeShellScript "cancel-reboot-if-minecraft-running" ''
+    set -euo pipefail
+    if ! ${ensureMinecraftStopped}; then
+      echo "Cancelling scheduled reboot because a Minecraft server is running"
+      ${config.systemd.package}/bin/shutdown -c || true
+    fi
+  '';
 in
 {
   services.minecraft-servers = {
@@ -59,6 +86,17 @@ in
       };
       jvmOpts = "-Xmx2560M -Xms1024M -XX:+UseZGC -XX:+UseCompactObjectHeaders -XX:+UseStringDeduplication -XX:+PerfDisableSharedMem";
       symlinks.mods = "${modpack}/mods";
+    };
+  };
+
+  # Skip automatic builds and reboots while a Minecraft server is running.
+  systemd.services = {
+    nixos-upgrade.serviceConfig = {
+      ExecCondition = [ "${ensureMinecraftStopped}" ];
+      ExecStartPost = [ "${cancelRebootIfMinecraftRunning}" ];
+    };
+    torni-cache-build.serviceConfig = {
+      ExecCondition = [ "${ensureMinecraftStopped}" ];
     };
   };
 }
