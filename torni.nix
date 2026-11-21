@@ -195,6 +195,7 @@
     helix
     musescore
     antigravity-cli
+    (callPackage ./t3code-nightly.nix { })
   ];
   system.stateVersion = "26.05";
 }
