@@ -4,6 +4,8 @@
   cloudflared,
   symlinkJoin,
   makeBinaryWrapper,
+  enableAntigravity ? false,
+  antigravity-cli,
   enableAzureDevOps ? false,
   azure-cli,
   azure-cli-extensions,
@@ -11,7 +13,7 @@
   bitbucket-cli,
   enableClaude ? false,
   claude-code,
-  enableCodex ? true,
+  enableCodex ? false,
   codex,
   enableCursor ? false,
   code-cursor,
@@ -34,7 +36,8 @@
 
 let
   runtimePackages =
-    lib.optionals enableAzureDevOps [
+    lib.optionals enableAntigravity [ antigravity-cli ]
+    ++ lib.optionals enableAzureDevOps [
       (azure-cli.withExtensions [ azure-cli-extensions.azure-devops ])
     ]
     ++ lib.optionals enableBitbucket [ bitbucket-cli ]

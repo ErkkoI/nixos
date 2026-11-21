@@ -1,12 +1,12 @@
 {
-  cctools,
+  cacert,
   copyDesktopItems,
   electron_44,
   fetchFromGitHub,
+  fetchPnpmDeps,
   installShellFiles,
   jq,
   lib,
-  libicns,
   libsecret,
   makeBinaryWrapper,
   makeDesktopItem,
@@ -14,16 +14,12 @@
   node-gyp,
   nodejs_26,
   pkg-config,
+  pnpm_12,
+  pnpmBuildHook,
+  pnpmConfigHook,
   python3,
   spdx-license-list-data,
   stdenv,
-  writeDarwinBundle,
-  xcbuild,
-  fetchPnpmDeps,
-  pnpm_12,
-  pnpmConfigHook,
-  pnpmBuildHook,
-  cacert,
 }:
 
 stdenv.mkDerivation (
@@ -33,11 +29,7 @@ stdenv.mkDerivation (
     electron = electron_44;
     nodejs = nodejs_26;
     pnpm = pnpm_12;
-    desktopIcon =
-      if stdenv.hostPlatform.isDarwin then
-        "assets/prod/black-macos-1024.png"
-      else
-        "assets/prod/black-universal-1024.png";
+    desktopIcon = "assets/prod/black-universal-1024.png";
 
   in
   {
@@ -64,29 +56,21 @@ stdenv.mkDerivation (
     '';
 
     nativeBuildInputs = [
+      cacert
+      copyDesktopItems
       installShellFiles
       jq
       makeBinaryWrapper
       node-gyp
       nodejs
-      python3
-      pnpmConfigHook
-      pnpmBuildHook
-      pnpm
-      cacert
-    ]
-    ++ lib.optionals stdenv.hostPlatform.isLinux [
-      copyDesktopItems
       pkg-config
-    ]
-    ++ lib.optionals stdenv.hostPlatform.isDarwin [
-      cctools.libtool
-      libicns
-      writeDarwinBundle
-      xcbuild
+      pnpm
+      pnpmBuildHook
+      pnpmConfigHook
+      python3
     ];
 
-    buildInputs = lib.optionals stdenv.hostPlatform.isLinux [ libsecret ];
+    buildInputs = [ libsecret ];
 
     pnpmWorkspaces = [
       "@t3tools/monorepo"
@@ -146,13 +130,10 @@ stdenv.mkDerivation (
       mkdir --parents "$out"/libexec/t3code/apps/desktop/prod-resources
       install --mode=444 ${desktopIcon} \
         "$out"/libexec/t3code/apps/desktop/prod-resources/icon.png
-    ''
-    + lib.optionalString stdenv.hostPlatform.isLinux ''
+
       install -Dm755 \
         native/browser-secret/build/${stdenv.hostPlatform.node.arch}/t3-browser-secret \
         "$out"/libexec/t3code/apps/desktop/prod-resources/browser-secret/t3-browser-secret
-    ''
-    + ''
 
       find "$out"/libexec/t3code -xtype l -delete
 
@@ -162,21 +143,7 @@ stdenv.mkDerivation (
       makeWrapper ${lib.getExe electron} "$out"/bin/t3code-desktop \
         --add-flags "$out"/libexec/t3code/apps/desktop \
         --inherit-argv0
-    ''
-    + lib.optionalString stdenv.hostPlatform.isDarwin ''
-      find "$out"/libexec/t3code \
-        -path '*/node-pty/prebuilds/darwin-*/spawn-helper' \
-        -exec chmod 755 {} +
 
-      mkdir --parents "$out/Applications/${appName}.app/Contents/"{MacOS,Resources}
-      png2icns \
-        "$out/Applications/${appName}.app/Contents/Resources/t3code.icns" \
-        ${desktopIcon}
-
-      ${stdenv.shell} ${lib.getExe writeDarwinBundle} \
-        "$out" "${appName}" t3code-desktop t3code
-    ''
-    + ''
       mkdir --parents \
         "$out"/share/icons/hicolor/{1024x1024,scalable}/apps
       install --mode=444 ${desktopIcon} \
@@ -193,7 +160,7 @@ stdenv.mkDerivation (
       done
     '';
 
-    postFixup = lib.optionalString stdenv.hostPlatform.isLinux ''
+    postFixup = ''
       # Electron's Node runtime does not provide libstdc++ for the bundled node-pty prebuild
       for module in "$out"/libexec/t3code/node_modules/.pnpm/node-pty@*/node_modules/node-pty/prebuilds/linux-${stdenv.hostPlatform.node.arch}/pty.node; do
         patchelf --add-rpath ${lib.makeLibraryPath [ stdenv.cc.cc.lib ]} "$module"
@@ -230,7 +197,7 @@ stdenv.mkDerivation (
       changelog = "https://github.com/pingdotgg/t3code/releases/tag/${finalAttrs.src.tag}";
       license = lib.licenses.mit;
       mainProgram = "t3code-desktop";
-      inherit (nodejs.meta) platforms;
+      platforms = lib.platforms.linux;
     };
   }
 )

@@ -199,8 +199,7 @@
     github-cli
     helix
     musescore
-    antigravity-cli
-    (callPackage ./t3code-nightly { })
+    (callPackage ./t3code-nightly { enableAntigravity = true; })
   ];
   system.stateVersion = "26.05";
 }
