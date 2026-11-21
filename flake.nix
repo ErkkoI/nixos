@@ -27,10 +27,11 @@
       };
     in
     {
-      packages.x86_64-linux.t3code-nightly = pkgsUnstable.callPackage ./t3code-nightly { };
+      packages.x86_64-linux.t3code-nightly = pkgsUnstable.callPackage ./pkgs/t3code-nightly { };
       nixosConfigurations = {
         pannu = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit pkgsUnstable; };
           modules = [
             disko.nixosModules.disko
             nix-minecraft.nixosModules.minecraft-servers
@@ -42,7 +43,8 @@
                   "minecraft-server"
                 ];
             }
-            ./pannu.nix
+            ./hosts/common.nix
+            ./hosts/pannu
           ];
         };
         torni = nixpkgs-unstable.lib.nixosSystem {
@@ -50,7 +52,8 @@
           modules = [
             disko.nixosModules.disko
             { nixpkgs.config.allowUnfree = true; }
-            ./torni.nix
+            ./hosts/common.nix
+            ./hosts/torni
           ];
         };
       };

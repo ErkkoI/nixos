@@ -5,9 +5,9 @@
 }:
 {
   imports = [
-    ./disk-config-torni.nix
-    ./hardware-configuration-torni.nix
-    ./wireguard-torni.nix
+    ./disk-config.nix
+    ./hardware-configuration.nix
+    ./wireguard.nix
   ];
   time.timeZone = "Europe/Helsinki";
   i18n = {
@@ -57,11 +57,6 @@
     };
   };
   nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    auto-optimise-store = true;
     connect-timeout = 5;
     extra-substituters = [
       "ssh-ng://nix-cache@erkkoihalainen.fi?priority=50&ssh-key=/var/lib/secrets/nix-cache-ssh-key"
@@ -155,19 +150,7 @@
       };
     };
   };
-  users.users.erkkoi = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ];
-  };
-  security.sudo.wheelNeedsPassword = false;
-  services.btrfs.autoScrub = {
-    enable = true;
-    interval = "weekly";
-    fileSystems = [ "/" ];
-  };
+  users.users.erkkoi.extraGroups = [ "networkmanager" ];
   services = {
     desktopManager.plasma6.enable = true;
     displayManager = {
@@ -194,12 +177,9 @@
   environment.systemPackages = with pkgs; [
     keepassxc
     opencloud-desktop
-    btop
-    fastfetch
     github-cli
     helix
     musescore
-    (callPackage ./t3code-nightly { enableAntigravity = true; })
+    (callPackage ../../pkgs/t3code-nightly { enableAntigravity = true; })
   ];
-  system.stateVersion = "26.05";
 }

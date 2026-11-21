@@ -21,7 +21,7 @@ let
     ];
     jdk = pkgs.jdk25_headless;
   };
-  modpack = pkgs.callPackage ./modpack { };
+  modpack = pkgs.callPackage ../../pkgs/modpack { };
   mcVersion = modpack.pack.versions.minecraft;
   fabricVersion = modpack.pack.versions.fabric;
   serverVersion = lib.replaceString "." "_" "fabric-${mcVersion}";

@@ -7,20 +7,16 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./disk-config-pannu.nix
+    ./disk-config.nix
     ./caddy.nix
     ./opencloud.nix
     ./minecraft.nix
     ./torni-cache.nix
-    ./wireguard-pannu.nix
+    ./t3code.nix
+    ./wireguard.nix
   ];
   time.timeZone = "UTC";
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
   nix.gc.options = "--delete-older-than 7d";
-  nix.settings.auto-optimise-store = true;
   boot.zswap.enable = true;
   services.journald.extraConfig = "SystemMaxUse=200M";
   system.autoUpgrade = {
@@ -52,24 +48,11 @@
       PerSourcePenalties = "crash:3600s authfail:3600s max:86400s";
     };
   };
-  users.users.erkkoi = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBPsGRR6hn6KG6/qlGejQXeP2pAe811qJFuEoMFdznNv"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqwBPCqs921XN4mRHfJDy64x47t6n0SXoSDaPFlWnGH"
-    ];
-  };
-  security.sudo.wheelNeedsPassword = false;
-  services.btrfs.autoScrub = {
-    enable = true;
-    interval = "weekly";
-    fileSystems = [ "/" ];
-  };
+  users.users.erkkoi.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBPsGRR6hn6KG6/qlGejQXeP2pAe811qJFuEoMFdznNv"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqwBPCqs921XN4mRHfJDy64x47t6n0SXoSDaPFlWnGH"
+  ];
   environment.systemPackages = with pkgs; [
     gitMinimal
-    btop
-    fastfetch
   ];
-  system.stateVersion = "26.05";
 }
