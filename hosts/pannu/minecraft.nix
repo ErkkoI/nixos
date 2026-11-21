@@ -89,8 +89,14 @@ in
     };
   };
 
-  # Skip automatic upgrades and reboots while a Minecraft server is running.
+  # Skip automatic upgrades and reboots while a Minecraft server is running,
+  # and further restrict filesystem and privilege access for the server unit.
   systemd.services = {
+    minecraft-server-joulupojat.serviceConfig = {
+      NoNewPrivileges = true;
+      ProtectSystem = "strict";
+      ReadWritePaths = [ config.services.minecraft-servers.dataDir ];
+    };
     nixos-upgrade.serviceConfig = {
       ExecCondition = [ "${ensureMinecraftStopped}" ];
       ExecStartPost = [ "${cancelRebootIfMinecraftRunning}" ];

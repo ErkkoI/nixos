@@ -17,6 +17,14 @@
   nix.gc.options = "--delete-older-than 7d";
   nix.settings.max-jobs = 1;
   boot.zswap.enable = true;
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.accept_redirects" = 0;
+    "net.ipv4.conf.default.accept_redirects" = 0;
+    "net.ipv6.conf.all.accept_redirects" = 0;
+    "net.ipv6.conf.default.accept_redirects" = 0;
+    "net.ipv4.conf.all.send_redirects" = 0;
+    "net.ipv4.conf.default.send_redirects" = 0;
+  };
   services.journald.extraConfig = "SystemMaxUse=200M";
   system.autoUpgrade = {
     enable = true;
@@ -43,6 +51,9 @@
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
       AllowUsers = [ "erkkoi" ];
+      AllowAgentForwarding = false;
+      AllowTcpForwarding = "no";
+      PermitTunnel = "no";
       MaxAuthTries = 3;
       PerSourcePenalties = "crash:3600s authfail:3600s max:86400s";
     };

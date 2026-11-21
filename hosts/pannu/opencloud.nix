@@ -5,6 +5,7 @@ in
 {
   services.caddy = {
     virtualHosts."cloud.erkkoihalainen.fi".extraConfig = ''
+      header Strict-Transport-Security "max-age=31536000; includeSubDomains"
       reverse_proxy 127.0.0.1:9200
     '';
   };
@@ -14,7 +15,6 @@ in
     port = 9200;
     url = "https://cloud.erkkoihalainen.fi";
     address = "127.0.0.1";
-    environmentFile = secretsFile;
     environment = {
       PROXY_TLS = "false";
       IDM_CREATE_DEMO_USERS = "false";
@@ -25,20 +25,15 @@ in
   # enters the repository, Nix store, shell arguments, or this playbook.
   systemd.services.opencloud-bootstrap-secrets = {
     description = "Create the initial OpenCloud admin credential";
-    before = [
-      "opencloud-init-config.service"
-      "opencloud.service"
-    ];
-    requiredBy = [
-      "opencloud-init-config.service"
-      "opencloud.service"
-    ];
+    before = [ "opencloud-init-config.service" ];
+    requiredBy = [ "opencloud-init-config.service" ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
       UMask = "0077";
     };
     script = ''
+      set -euo pipefail
       install -d -m 0700 /var/lib/secrets
       if [ ! -e ${secretsFile} ]; then
         credential_file=$(mktemp /var/lib/secrets/.opencloud.XXXXXX)
@@ -49,6 +44,10 @@ in
       chmod 0600 ${secretsFile}
     '';
   };
+
+  # Pass ADMIN_PASSWORD only to the one-shot provisioning unit so it does not
+  # remain in the long-running opencloud daemon's environment.
+  systemd.services.opencloud-init-config.serviceConfig.EnvironmentFile = [ secretsFile ];
 
   systemd.services.opencloud = {
     requires = [ "opencloud-init-config.service" ];
