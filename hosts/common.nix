@@ -12,10 +12,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
   };
-  security.sudo = {
-    wheelNeedsPassword = false;
-    execWheelOnly = true;
-  };
+  security.sudo.execWheelOnly = true;
 
   services.btrfs.autoScrub = {
     enable = true;

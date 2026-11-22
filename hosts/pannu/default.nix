@@ -62,6 +62,8 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBPsGRR6hn6KG6/qlGejQXeP2pAe811qJFuEoMFdznNv"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqwBPCqs921XN4mRHfJDy64x47t6n0SXoSDaPFlWnGH"
   ];
+  # erkkoi has no UNIX password on pannu (SSH key-only auth).
+  security.sudo.wheelNeedsPassword = false;
   environment.systemPackages = with pkgs; [
     gitMinimal
   ];
