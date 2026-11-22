@@ -21,13 +21,8 @@
     }:
     let
       pkgs = import nixpkgs { system = "x86_64-linux"; };
-      pkgsUnstable = import nixpkgs-unstable {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
     in
     {
-      packages.x86_64-linux.t3code-nightly = pkgsUnstable.callPackage ./pkgs/t3code-nightly { };
       nixosConfigurations = {
         pannu = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

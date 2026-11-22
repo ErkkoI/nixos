@@ -7,6 +7,7 @@
   imports = [
     ./disk-config.nix
     ./hardware-configuration.nix
+    ./t3code-nightly.nix
     ./wireguard.nix
   ];
   time.timeZone = "Europe/Helsinki";
@@ -159,11 +160,11 @@
     enable = true;
   };
   environment.systemPackages = with pkgs; [
+    antigravity-cli
     keepassxc
     opencloud-desktop
     github-cli
     helix
     musescore
-    (callPackage ../../pkgs/t3code-nightly { enableAntigravity = true; })
   ];
 }
