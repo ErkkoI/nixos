@@ -5,6 +5,7 @@
 }:
 {
   imports = [
+    ./auto-upgrade.nix
     ./disk-config.nix
     ./hardware-configuration.nix
     ./t3code-nightly.nix
